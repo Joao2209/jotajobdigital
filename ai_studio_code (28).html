@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jota Corporation | Assessoria Digital de Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-black: #0a0a0a;
+            --gold-primary: #d4af37; /* Ouro Clássico */
+            --gold-gradient: linear-gradient(135deg, #f1c40f 0%, #d4af37 50%, #b8860b 100%);
+            --card-bg: rgba(20, 20, 20, 0.8);
+            --text-main: #ffffff;
+            --text-dim: #a0a0a0;
+            --border-gold: rgba(212, 175, 55, 0.3);
+        }
+
+        /* Tela de Inicialização */
+        #intro-screen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: var(--bg-black); z-index: 10000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 1s ease-out, visibility 1s; text-align: center;
+        }
+        .intro-content h2 {
+            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-family: 'Playfair Display', serif; font-size: 3rem; margin-bottom: 10px;
+            opacity: 0; transform: translateY(20px); animation: fadeInUp 1s forwards 0.5s;
+        }
+
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
+
+        /* Geral */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Montserrat', sans-serif; scroll-behavior: smooth; }
+        body { background-color: var(--bg-black); color: var(--text-main); overflow-x: hidden; }
+
+        header { 
+            padding: 1.5rem 5%; display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid var(--border-gold); background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo { font-weight: 900; letter-spacing: 2px; font-size: 1.2rem; }
+        .logo span { background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+
+        nav a { color: var(--text-main); text-decoration: none; margin-left: 25px; font-size: 0.8rem; text-transform: uppercase; font-weight: 700; transition: 0.3s; }
+        nav a:hover { color: var(--gold-primary); }
+
+        /* Hero */
+        .hero { padding: 120px 5%; text-align: center; background: radial-gradient(circle at center, #1a1a1a 0%, #0a0a0a 100%); }
+        .hero h1 { 
+            font-family: 'Playfair Display', serif; font-size: 4.5rem; line-height: 1.1; margin-bottom: 30px;
+            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero p { font-size: 1.2rem; color: var(--text-dim); max-width: 800px; margin: 0 auto 40px; }
+
+        .btn-gold {
+            background: var(--gold-gradient); color: #000; padding: 20px 50px; border-radius: 5px;
+            text-decoration: none; font-weight: 900; text-transform: uppercase; display: inline-block;
+            transition: 0.4s; border: none; cursor: pointer; letter-spacing: 1px;
+        }
+        .btn-gold:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(212, 175, 55, 0.4); }
+
+        /* Case Section */
+        .case-section { padding: 80px 5%; background: #000; }
+        .case-container { 
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; 
+            border: 1px solid var(--border-gold); padding: 50px; border-radius: 20px; background: var(--card-bg);
+        }
+        .case-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .stat-item { padding: 20px; border: 1px solid var(--border-gold); border-radius: 10px; text-align: center; }
+        .stat-item h4 { color: var(--gold-primary); font-size: 2rem; margin-bottom: 5px; }
+        .stat-item p { font-size: 0.8rem; text-transform: uppercase; color: var(--text-dim); }
+
+        .case-text h2 { font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 20px; }
+        .case-text span { color: var(--gold-primary); font-weight: 900; }
+
+        /* Benefícios */
+        .services { padding: 100px 5%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card { padding: 40px; border: 1px solid var(--border-gold); background: rgba(255,255,255,0.02); transition: 0.3s; }
+        .service-card:hover { background: rgba(212, 175, 55, 0.05); border-color: var(--gold-primary); }
+        .service-card h3 { color: var(--gold-primary); margin-bottom: 15px; font-size: 1.5rem; }
+
+        /* CTA WhatsApp */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background: #25d366; width: 60px; height: 60px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 1000;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5); text-decoration: none;
+        }
+
+        footer { padding: 50px 5%; text-align: center; border-top: 1px solid var(--border-gold); color: var(--text-dim); }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.8rem; }
+            .case-container { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="intro-screen">
+        <div class="intro-content">
+            <h2>JOTA CORPORATION</h2>
+            <p style="color: #fff; text-transform: uppercase; letter-spacing: 5px;">A elite do mercado digital</p>
+        </div>
+    </div>
+
+    <a href="https://api.whatsapp.com/send/?phone=5511946454891" class="whatsapp-float" target="_blank">
+        <svg fill="#fff" width="30" height="30" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.417-.003 6.557-5.338 11.892-11.893 11.892-1.997-.001-3.951-.499-5.688-1.447l-6.305 1.65zm6.59-4.807c1.42.844 2.889 1.268 4.347 1.268 5.343 0 9.692-4.348 9.695-9.693.001-2.583-1.005-5.013-2.833-6.841s-4.259-2.833-6.842-2.832c-5.343 0-9.692 4.349-9.695 9.693-.001 1.711.453 3.313 1.314 4.647l-.952 3.483 3.566-.925z"/></svg>
+    </a>
+
+    <header>
+        <div class="logo">JOTA <span>CORPORATION</span></div>
+        <nav>
+            <a href="#case">Case de Sucesso</a>
+            <a href="#assessoria">Assessoria</a>
+            <a href="https://api.whatsapp.com/send/?phone=5511946454891">Aplicar Agora</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <h1>Sua Beleza é um <br><span>Ativo Digital</span></h1>
+            <p>Deixamos o amadorismo para trás. A Jota Corporation insere você no mercado de venda de conteúdo com estratégia, privacidade e escala global.</p>
+            <a href="https://api.whatsapp.com/send/?phone=5511946454891" class="btn-gold">Quero Escalar meu Faturamento</a>
+        </section>
+
+        <section class="case-section" id="case">
+            <div class="case-container">
+                <div class="case-text">
+                    <h2>Case de Sucesso: <span>Michelebb</span></h2>
+                    <p>Em apenas <strong>7 dias</strong>, aplicamos nosso método de tráfego orgânico e conversão de funil de vendas, retirando a Michelebb do mercado físico e inserindo-a no topo do mercado digital.</p>
+                </div>
+                <div class="case-stats">
+                    <div class="stat-item">
+                        <h4>+200k</h4>
+                        <p>Visualizações em 1 semana</p>
+                    </div>
+                    <div class="stat-item">
+                        <h4>R$ 1.000+</h4>
+                        <p>Lucro Líquido Inicial</p>
+                    </div>
+                    <div class="stat-item" style="grid-column: span 2;">
+                        <h4>100% Digital</h4>
+                        <p>Liberdade Geográfica e Segurança</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="services" id="assessoria">
+            <div class="service-card">
+                <h3>Gestão de Tráfego</h3>
+                <p>Estratégias de viralização para Instagram, TikTok e Twitter para atrair assinantes qualificados diariamente.</p>
+            </div>
+            <div class="service-card">
+                <h3>Funil de Vendas</h3>
+                <p>Criamos a estrutura de vendas automática. Você foca na criação, nós focamos no fechamento do lucro.</p>
+            </div>
+            <div class="service-card">
+                <h3>Blindagem e Anonimato</h3>
+                <p>Protocolos de segurança para quem deseja vender conteúdo mantendo a privacidade fora do radar indesejado.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p><strong>JOTA CORPORATION</strong> - Gestão de Ativos Digitais & Marketing de Elite</p>
+        <p style="margin-top: 15px; font-size: 0.7rem; opacity: 0.5;">&copy; 2025 Todos os direitos reservados. Proibida cópia parcial ou total.</p>
+    </footer>
+
+    <script>
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const intro = document.getElementById('intro-screen');
+                intro.style.opacity = '0';
+                setTimeout(function() { intro.style.visibility = 'hidden'; }, 1000);
+            }, 3000); 
+        });
+    </script>
+</body>
+</html>
